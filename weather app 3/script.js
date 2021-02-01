@@ -2,7 +2,8 @@ let loc =document.getElementById("location");
 let tempicon=document.getElementById("temp-icon");
 let tempvalue=document.getElementById("temp-value");
 let climate =document.getElementById("climate");
-let sunrise =document.getElementById("sunrise");
+let sunup =document.getElementById("sunrise");
+let sundown =document.getElementById("sunset");
 let vis =document.getElementById("visibility");
 let windspeed =document.getElementById("wind-speed");
 let iconfile;
@@ -82,17 +83,6 @@ catch(error)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 window.addEventListener("load" ,()=>{
 
 let long;
@@ -128,9 +118,11 @@ if(navigator.geolocation)
                     const{id,main}=data.weather[0];
                     const{speed}=data.wind;
                     const{sunrise}=data.sys;
+                    const{sunset}=data.sys;
                     
                     windspeed.textContent=speed;
-                    sunrise.textContent=sunrise;
+                    sunup.textContent=sunrise;
+                    sundown.textContent=sunset;
                     loc.textContent=name;
                     vis.textContent=visibility;
                     climate.textContent=main;
