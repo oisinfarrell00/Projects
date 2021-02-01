@@ -4,7 +4,7 @@ let tempvalue=document.getElementById("temp-value");
 let climate =document.getElementById("climate");
 let sunup =document.getElementById("sunrise");
 let sundown =document.getElementById("sunset");
-let vis =document.getElementById("visibility");
+let vis =document.getElementById("visibility-text");
 let windspeed =document.getElementById("wind-speed");
 let iconfile;
 const searchInput=document.getElementById("search-input");
@@ -21,6 +21,32 @@ searchInput.value='';
 });
 
 
+let nasaSearch = document.querySelector("#search")
+
+//Add an event listener to the button that runs the function sendApiRequest when it is clicked
+nasaSearch.addEventListener("click", ()=>{
+  console.log("button pressed")
+  sendApiRequest()
+})
+
+
+//An asynchronous function to fetch data from the API.
+async function sendApiRequest(){
+    let NASA_API_KEY = "iNgvJ2fwCli82OcUxeLUHn9X1ZwFF40znsxUV56k"
+    let response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`);
+    console.log(response)
+    let data = await response.json()
+    console.log(data)
+    useApiData(data)
+}
+
+
+//function that does something with the data received from the API. The name of the function should be customized to whatever you are doing with the data
+function useApiData(data){
+    document.querySelector("#nasa-content").innerHTML += data.explanation
+    document.querySelector("#nasa-content").innerHTML += `<img src="${data.url}">`
+}
+
 
 const getWeather=async (city)=>
 {
@@ -36,7 +62,6 @@ const getWeather=async (city)=>
         const{name}=weatherData;
         const{feels_like}=weatherData.main;
         const{sunrise}=weatherData.sys;
-        console.log(sunrise);
         const{id,main}=weatherData.weather[0];
         loc.textContent=name;
         climate.textContent=main;
@@ -124,7 +149,7 @@ if(navigator.geolocation)
                     sunup.textContent=sunrise;
                     sundown.textContent=sunset;
                     loc.textContent=name;
-                    vis.textContent=visibility;
+                    vis.textContent=visibility/1000;
                     climate.textContent=main;
                     tempvalue.textContent=Math.round(feels_like-273);
                     if(id<300 && id>200)
