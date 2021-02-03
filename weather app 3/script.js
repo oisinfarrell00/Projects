@@ -44,7 +44,7 @@ async function sendApiRequest(){
 //function that does something with the data received from the API. The name of the function should be customized to whatever you are doing with the data
 function useApiData(data){
     document.querySelector("#nasa-content").innerHTML += data.explanation
-    document.querySelector("#nasa-content").innerHTML += `<img src="${data.url}">`
+    document.querySelector("#nasa-content").innerHTML += `<img src="${data.url}" style="width:200px;height:200px;">`
 }
 
 
