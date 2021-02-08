@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, ScrollView } from 'react-native';
 import * as Location from 'expo-location'
 import WeatherInfo from './components/WeatherInfo'
 import UnitsPicker from './components/UnitsPicker'
@@ -8,6 +8,7 @@ import ReloadIcon from './components/ReloadIcon'
 import WeatherDetails from './components/WeatherDetails'
 import {colors} from './utils/index'
 
+//---- NASA PHOTO OF THE DAY IMPORTS
 
 const WEATHER_API_KEY = '4c4b8e439cc42171116fe5870881340d'
 
@@ -63,7 +64,6 @@ export default function App() {
       </View>
       <WeatherDetails currentWeather={currentWeather} unitsSystem={unitsSystem} />
     </View>
-    
     )
   }else if(errorMessage){
     return (
@@ -80,8 +80,7 @@ export default function App() {
       <StatusBar style="auto" />
     </View>
     )
-  }
-  
+  }  
 }
 
 const styles = StyleSheet.create({
